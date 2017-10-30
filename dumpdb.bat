@@ -1,0 +1,1 @@
+mysqldump --opt ultrax --default-character-set=utf8 -h localhost -u root -p123456 >> ultrax.sql
