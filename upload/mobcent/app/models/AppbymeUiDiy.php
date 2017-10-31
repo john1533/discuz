@@ -40,31 +40,22 @@ class AppbymeUiDiy  {
             $tempModules = AppbymeUIDiyModel::initModules();
         }
         // 必须存在发现和快发模块
-        $isFindDiscover = $isFindFastpost = false;
+//         $isFindDiscover = $isFindFastpost = false;
         $modules = array();
         foreach ($tempModules as $module)
         {
-            switch ($module['id'])
-            {
-                case AppbymeUIDiyModel::MODULE_ID_DISCOVER:
-                    $isFindDiscover = true;
-                    break;
-                case AppbymeUIDiyModel::MODULE_ID_FASTPOST:
-                    $isFindFastpost = true;
-                    break;
-            }
-            $modules[] = $module;
+          $modules[] = $module;
         }
-        if(!$isFindFastpost)
-        {
-            $fastpostModule = AppbymeUIDiyModel::initFastpostModule();
-            array_unshift($modules, $fastpostModule);
-        }
-        if(!$isFindDiscover)
-        {
-            $discoverModule = AppbymeUIDiyModel::initDiscoverModule();
-            array_unshift($modules, $discoverModule);
-        }
+//         if(!$isFindFastpost)
+//         {
+//             $fastpostModule = AppbymeUIDiyModel::initFastpostModule();
+//             array_unshift($modules, $fastpostModule);
+//         }
+//         if(!$isFindDiscover)
+//         {
+//             $discoverModule = AppbymeUIDiyModel::initDiscoverModule();
+//             array_unshift($modules, $discoverModule);
+//         }
         return array('navInfo'=>$navInfo,'modules'=>$modules);
     }
 
