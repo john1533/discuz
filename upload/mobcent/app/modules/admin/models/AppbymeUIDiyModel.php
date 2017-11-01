@@ -239,6 +239,45 @@ class AppbymeUIDiyModel extends DiscuzAR {
     }
 
     public static function initModules() {
+    	
+    	$forums = ForumUtils::getForumSubList(39);
+    	$cmplist = array();
+//     	array_push($cmplist, self::initComponent(array(
+//     			'type' => self::COMPONENT_TYPE_TOPICLIST_SIMPLE,
+//     			'title' => '最新',
+//     			'style' => self::COMPONENT_STYLE_FLAT,
+//     			'extParams' => array(
+//     					'forumId' => 36,
+//     					'fastpostForumIds' => array(),
+//     					'filter' => 'typeid',
+//     					'filterId' => 0,
+//     					'orderby' => 'new',
+//     					'listTitleLength' => 40,
+//     					'listSummaryLength' => 40,
+//     					'listImagePosition' => self::IMAGE_POSITION_RIGHT,
+//     					'subDetailViewStyle' => self::COMPONENT_STYLE_CARD,
+//     			)
+//     	)));
+    	foreach ($forums as $forum) {
+//     		$tempForum['board_list'][] = $this->_getForumInfo($forum, $params);
+    		$cmplist = array_push($cmplist, self::initComponent(array(
+    				'type' => '最新',
+    				'title' => WebUtils::emptyHtml($forum['name']),
+    				'style' => self::COMPONENT_STYLE_FLAT,
+    				'extParams' => array(
+    						'forumId' => 36,
+    						'fastpostForumIds' => array(),
+    						'filter' => 'typeid',
+    						'filterId' => 0,
+    						'orderby' => 'new',
+    						'listTitleLength' => 40,
+    						'listSummaryLength' => 40,
+    						'listImagePosition' => self::IMAGE_POSITION_RIGHT,
+    						'subDetailViewStyle' => self::COMPONENT_STYLE_CARD,
+    				)
+    		)));
+    	}
+    	
         return array(
 //             self::initDiscoverModule(),
 //             self::initFastpostModule(),
@@ -256,40 +295,41 @@ class AppbymeUIDiyModel extends DiscuzAR {
                         'type' => self::COMPONENT_TYPE_EMPTY,
                     )),
                 ),
-                'componentList' => array(
-                    self::initComponent(array(
-                        'type' => self::COMPONENT_TYPE_TOPICLIST_SIMPLE,
-                        'title' => '最新',
-                        'style' => self::COMPONENT_STYLE_TIEBA,
-                        'extParams' => array(
-                            'forumId' => 0,
-                            'fastpostForumIds' => array(),
-                            'filter' => 'typeid',
-                            'filterId' => 0,
-                            'orderby' => 'new',
-                            'listTitleLength' => 40,
-                            'listSummaryLength' => 40,
-                            'listImagePosition' => self::IMAGE_POSITION_RIGHT,
-                            'subDetailViewStyle' => self::COMPONENT_STYLE_CARD,
-                        ),
-                    )),
-                    self::initComponent(array(
-                        'type' => self::COMPONENT_TYPE_TOPICLIST_SIMPLE,
-                        'title' => '精华',
-                        'style' => self::COMPONENT_STYLE_NETEASE_NEWS,
-                        'extParams' => array(
-                            'forumId' => 0,
-                            'fastpostForumIds' => array(),
-                            'filter' => 'typeid',
-                            'filterId' => 0,
-                            'orderby' => 'marrow',
-                            'listTitleLength' => 40,
-                            'listSummaryLength' => 0,
-                            'listImagePosition' => self::IMAGE_POSITION_RIGHT,
-                            'subDetailViewStyle' => self::COMPONENT_STYLE_FLAT,
-                        ),
-                    )),
-                ),
+            		'componentList' => $cmplist,
+//                 'componentList' => array(
+//                     self::initComponent(array(
+//                         'type' => self::COMPONENT_TYPE_TOPICLIST_SIMPLE,
+//                         'title' => '最新',
+//                     	'style' => self::COMPONENT_STYLE_FLAT,
+//                         'extParams' => array(
+//                             'forumId' => 36,
+//                             'fastpostForumIds' => array(),
+//                             'filter' => 'typeid',
+//                             'filterId' => 0,
+//                             'orderby' => 'new',
+//                             'listTitleLength' => 40,
+//                             'listSummaryLength' => 40,
+//                             'listImagePosition' => self::IMAGE_POSITION_RIGHT,
+//                             'subDetailViewStyle' => self::COMPONENT_STYLE_CARD,
+//                         ),
+//                     )),
+//                     self::initComponent(array(
+//                         'type' => self::COMPONENT_TYPE_TOPICLIST_SIMPLE,
+//                         'title' => '精华',
+//                     	'style' => self::COMPONENT_STYLE_FLAT,
+//                         'extParams' => array(
+//                             'forumId' => 37,
+//                             'fastpostForumIds' => array(),
+//                             'filter' => 'typeid',
+//                             'filterId' => 0,
+//                             'orderby' => 'marrow',
+//                             'listTitleLength' => 40,
+//                             'listSummaryLength' => 0,
+//                             'listImagePosition' => self::IMAGE_POSITION_RIGHT,
+//                             'subDetailViewStyle' => self::COMPONENT_STYLE_FLAT,
+//                         ),
+//                     )),
+//                 ),
             )),
         		
         	self::initModule(array(
@@ -306,7 +346,8 @@ class AppbymeUIDiyModel extends DiscuzAR {
         								'type' => self::COMPONENT_TYPE_EMPTY,
         						)),
         				),
-        				'componentList' => array(
+        				'componentList' => 
+        			array(
         						self::initComponent(array(
         								'type' => self::COMPONENT_TYPE_TOPICLIST_SIMPLE,
         								'title' => '最新',

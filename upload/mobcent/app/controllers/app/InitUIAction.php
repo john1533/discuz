@@ -66,14 +66,12 @@ class InitUIAction extends MobcentAction {
         $uidiyModle->getUiDiyVersion();
         $result = $uidiyModle->getInfo(false);
         $temp = WebUtils::tarr($result['modules']);
-        $nav = WebUtils::tarr($result['navInfo']);
         foreach ($temp as $module) {
             if (!$custom && $module['type'] == AppbymeUIDiyModel::MODULE_TYPE_CUSTOM) {
                 $module['componentList'] = array();
             }
             $moduleList[] = AppUtils::filterModule($module);
         }
-        $res['body']['navigation'] = $nav;
         $res['body']['moduleList'] = $moduleList;
         $res['head']['errInfo'] = '';
         $res['md5'] = md5(WebUtils::outputWebApi($res, '', false));
