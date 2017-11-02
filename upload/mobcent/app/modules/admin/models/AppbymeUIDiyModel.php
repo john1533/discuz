@@ -240,32 +240,37 @@ class AppbymeUIDiyModel extends DiscuzAR {
 
     public static function initModules() {
     	
-    	$forums = ForumUtils::getForumSubList(39);
-    	$cmplist = array();
-//     	array_push($cmplist, self::initComponent(array(
-//     			'type' => self::COMPONENT_TYPE_TOPICLIST_SIMPLE,
-//     			'title' => '最新',
-//     			'style' => self::COMPONENT_STYLE_FLAT,
-//     			'extParams' => array(
-//     					'forumId' => 36,
-//     					'fastpostForumIds' => array(),
-//     					'filter' => 'typeid',
-//     					'filterId' => 0,
-//     					'orderby' => 'new',
-//     					'listTitleLength' => 40,
-//     					'listSummaryLength' => 40,
-//     					'listImagePosition' => self::IMAGE_POSITION_RIGHT,
-//     					'subDetailViewStyle' => self::COMPONENT_STYLE_CARD,
-//     			)
-//     	)));
+    	$forums = ForumUtils::getForumList(1);
+    	$cmplist1= array();
     	foreach ($forums as $forum) {
-//     		$tempForum['board_list'][] = $this->_getForumInfo($forum, $params);
-    		$cmplist = array_push($cmplist, self::initComponent(array(
-    				'type' => '最新',
+    		array_push($cmplist1, self::initComponent(array(
+    				'type' => self::COMPONENT_TYPE_TOPICLIST_SIMPLE,
     				'title' => WebUtils::emptyHtml($forum['name']),
     				'style' => self::COMPONENT_STYLE_FLAT,
     				'extParams' => array(
-    						'forumId' => 36,
+    						'forumId' => $forum['fid'],
+    						'fastpostForumIds' => array(),
+    						'filter' => 'typeid',
+    						'filterId' => 0,
+    						'orderby' => 'new',
+    						'listTitleLength' => 40,
+    						'listSummaryLength' => 40,
+    						'listImagePosition' => self::IMAGE_POSITION_RIGHT,
+    						'subDetailViewStyle' => self::COMPONENT_STYLE_CARD,
+    				)
+    		)));
+    	}
+    	
+    	
+    	$forums = ForumUtils::getForumList(39);
+    	$cmplist2= array();
+    	foreach ($forums as $forum) {
+    		array_push($cmplist2, self::initComponent(array(
+    				'type' => self::COMPONENT_TYPE_TOPICLIST_SIMPLE,
+    				'title' => WebUtils::emptyHtml($forum['name']),
+    				'style' => self::COMPONENT_STYLE_FLAT,
+    				'extParams' => array(
+    						'forumId' => $forum['fid'],
     						'fastpostForumIds' => array(),
     						'filter' => 'typeid',
     						'filterId' => 0,
@@ -279,8 +284,6 @@ class AppbymeUIDiyModel extends DiscuzAR {
     	}
     	
         return array(
-//             self::initDiscoverModule(),
-//             self::initFastpostModule(),
             self::initModule(array(
                 'id' => 3,
                 'title' => '资料',
@@ -295,41 +298,7 @@ class AppbymeUIDiyModel extends DiscuzAR {
                         'type' => self::COMPONENT_TYPE_EMPTY,
                     )),
                 ),
-            		'componentList' => $cmplist,
-//                 'componentList' => array(
-//                     self::initComponent(array(
-//                         'type' => self::COMPONENT_TYPE_TOPICLIST_SIMPLE,
-//                         'title' => '最新',
-//                     	'style' => self::COMPONENT_STYLE_FLAT,
-//                         'extParams' => array(
-//                             'forumId' => 36,
-//                             'fastpostForumIds' => array(),
-//                             'filter' => 'typeid',
-//                             'filterId' => 0,
-//                             'orderby' => 'new',
-//                             'listTitleLength' => 40,
-//                             'listSummaryLength' => 40,
-//                             'listImagePosition' => self::IMAGE_POSITION_RIGHT,
-//                             'subDetailViewStyle' => self::COMPONENT_STYLE_CARD,
-//                         ),
-//                     )),
-//                     self::initComponent(array(
-//                         'type' => self::COMPONENT_TYPE_TOPICLIST_SIMPLE,
-//                         'title' => '精华',
-//                     	'style' => self::COMPONENT_STYLE_FLAT,
-//                         'extParams' => array(
-//                             'forumId' => 37,
-//                             'fastpostForumIds' => array(),
-//                             'filter' => 'typeid',
-//                             'filterId' => 0,
-//                             'orderby' => 'marrow',
-//                             'listTitleLength' => 40,
-//                             'listSummaryLength' => 0,
-//                             'listImagePosition' => self::IMAGE_POSITION_RIGHT,
-//                             'subDetailViewStyle' => self::COMPONENT_STYLE_FLAT,
-//                         ),
-//                     )),
-//                 ),
+            	'componentList' => $cmplist1,
             )),
         		
         	self::initModule(array(
@@ -346,73 +315,8 @@ class AppbymeUIDiyModel extends DiscuzAR {
         								'type' => self::COMPONENT_TYPE_EMPTY,
         						)),
         				),
-        				'componentList' => 
-        			array(
-        						self::initComponent(array(
-        								'type' => self::COMPONENT_TYPE_TOPICLIST_SIMPLE,
-        								'title' => '最新',
-        								'style' => self::COMPONENT_STYLE_TIEBA,
-        								'extParams' => array(
-        										'forumId' => 0,
-        										'fastpostForumIds' => array(),
-        										'filter' => 'typeid',
-        										'filterId' => 0,
-        										'orderby' => 'new',
-        										'listTitleLength' => 40,
-        										'listSummaryLength' => 40,
-        										'listImagePosition' => self::IMAGE_POSITION_RIGHT,
-        										'subDetailViewStyle' => self::COMPONENT_STYLE_CARD,
-        								),
-        						)),
-        						self::initComponent(array(
-        								'type' => self::COMPONENT_TYPE_TOPICLIST_SIMPLE,
-        								'title' => '精华',
-        								'style' => self::COMPONENT_STYLE_NETEASE_NEWS,
-        								'extParams' => array(
-        										'forumId' => 0,
-        										'fastpostForumIds' => array(),
-        										'filter' => 'typeid',
-        										'filterId' => 0,
-        										'orderby' => 'marrow',
-        										'listTitleLength' => 40,
-        										'listSummaryLength' => 0,
-        										'listImagePosition' => self::IMAGE_POSITION_RIGHT,
-        										'subDetailViewStyle' => self::COMPONENT_STYLE_FLAT,
-        								),
-        						)),
-        				),
+        			'componentList' => $cmplist2,
         		)),
-//             self::initModule(array(
-//                 'id' => 4,
-//                 'title' => '社区',
-//                 'type' => self::MODULE_TYPE_FULL,
-//                 'componentList' => array(
-//                     self::initComponent(array(
-//                         'type' => self::COMPONENT_TYPE_FORUMLIST,
-//                         'title' => '版块',
-//                     )),
-//                 ),
-//                 'rightTopbars' => array(
-//                     self::initComponent(array(
-//                         'type' => self::COMPONENT_TYPE_SEARCH,
-//                         'icon' => self::COMPONENT_ICON_TOPBAR . '10',
-//                     )),
-//                     self::initComponent(array(
-//                         'type' => self::COMPONENT_TYPE_USERINFO,
-//                         'icon' => self::COMPONENT_ICON_TOPBAR . '6',
-//                     )),
-//                 ),
-//             )),
-//             self::initModule(array(
-//                 'id' => 5,
-//                 'title' => '消息',
-//                 'type' => self::MODULE_TYPE_FULL,
-//                 'componentList' => array(
-//                     self::initComponent(array(
-//                         'type' => self::COMPONENT_TYPE_MESSAGELIST,
-//                     )),
-//                 ),
-//             )),
         );
     }
 

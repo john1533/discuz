@@ -27,7 +27,7 @@ class AppbymeUiDiy  {
 
     public function getInfo($isTemp)
     {
-        $navInfo = $this->getNavInfo($isTemp);
+//         $navInfo = $this->getNavInfo($isTemp);
         $tempModules = $this->getModule($isTemp);
         //初始化默认配置2
         if (empty($tempModules))
