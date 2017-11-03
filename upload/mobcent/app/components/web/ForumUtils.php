@@ -80,6 +80,10 @@ class ForumUtils {
     public static function getForumGroupList() {
         return DzForumForum::getForumGroups();
     }
+    
+    public static function getForumByGroupId($gid) {
+    	return DzForumForum::getForumByGroupId($gid);
+    }
 
     public static function getForumList($gid) {
         return DzForumForum::getForumsByGid($gid);

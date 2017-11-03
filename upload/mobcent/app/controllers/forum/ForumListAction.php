@@ -91,7 +91,7 @@ class ForumListAction extends MobcentAction {
             $forumList[] = $tempForum;
         } else {
             $forumColumnStyle = WebUtils::getDzPluginAppbymeAppConfig('dzsyscache_forum_column_style');
-            $groups = ForumUtils::getForumGroupList();
+            $groups = ForumUtils::getForumByGroupId(39);
             foreach ($groups as $group) {
                 $gid = (int) $group['fid'];
                 $tempGroup = array();
@@ -105,6 +105,8 @@ class ForumListAction extends MobcentAction {
                 }
                 $forumList[] = $tempGroup;
             }
+            
+            
         }
 
         $fidList = ForumUtils::getForumShowFids();

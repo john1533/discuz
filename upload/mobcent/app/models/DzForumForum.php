@@ -69,6 +69,18 @@ class DzForumForum extends DiscuzAR {
             array('forum_forum', 'group', 1)
         );
     }
+    
+    // 获取版块分区
+    public static function getForumByGroupId($gid) {
+    	return DbUtils::createDbUtils(true)->queryAll('
+            SELECT *
+            FROM %t
+            WHERE type=%s AND status=%d and fid=%d
+            ORDER BY displayorder ASC
+            ',
+    			array('forum_forum', 'group', 1,$gid)
+    			);
+    }
 
     // 获取分区下的版块列表(不包括子版块)
     public static function getForumsByGid($gid) {
